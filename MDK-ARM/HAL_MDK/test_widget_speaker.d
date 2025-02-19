@@ -1,0 +1,17 @@
+hal_mdk\test_widget_speaker.o: ..\Module_sample\widget\test_widget_speaker.c
+hal_mdk\test_widget_speaker.o: ..\Module_sample\widget\test_widget_speaker.h
+hal_mdk\test_widget_speaker.o: ../LIb/include/dji_widget.h
+hal_mdk\test_widget_speaker.o: ../LIb/include/dji_typedef.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdbool.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\string.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdio.h
+hal_mdk\test_widget_speaker.o: ../LIb/include/dji_error.h
+hal_mdk\test_widget_speaker.o: ../LIb/include/dji_logger.h
+hal_mdk\test_widget_speaker.o: ../LIb/include/dji_platform.h
+hal_mdk\test_widget_speaker.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\errno.h
+hal_mdk\test_widget_speaker.o: ../Module_sample/utils/util_misc.h
+hal_mdk\test_widget_speaker.o: ../Module_sample/utils/util_md5.h
+hal_mdk\test_widget_speaker.o: ../LIb/include/dji_aircraft_info.h

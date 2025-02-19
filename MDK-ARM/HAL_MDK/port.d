@@ -1,0 +1,12 @@
+hal_mdk\port.o: ..\MIDWARE\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/FreeRTOS.h
+hal_mdk\port.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\port.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\port.o: ../Core/Inc/FreeRTOSConfig.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/projdefs.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/portable.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/deprecated_definitions.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/mpu_wrappers.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/task.h
+hal_mdk\port.o: ../MIDWARE/FreeRTOS/Source/include/list.h

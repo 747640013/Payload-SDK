@@ -1,0 +1,16 @@
+hal_mdk\test_upgrade.o: ..\Module_sample\upgrade\test_upgrade.c
+hal_mdk\test_upgrade.o: ../LIb/include/dji_logger.h
+hal_mdk\test_upgrade.o: ../LIb/include/dji_platform.h
+hal_mdk\test_upgrade.o: ../LIb/include/dji_typedef.h
+hal_mdk\test_upgrade.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\test_upgrade.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdbool.h
+hal_mdk\test_upgrade.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\test_upgrade.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\string.h
+hal_mdk\test_upgrade.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\test_upgrade.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdio.h
+hal_mdk\test_upgrade.o: ../LIb/include/dji_error.h
+hal_mdk\test_upgrade.o: ../Module_sample/utils/util_misc.h
+hal_mdk\test_upgrade.o: ..\Module_sample\upgrade\test_upgrade_common_file_transfer.h
+hal_mdk\test_upgrade.o: ../LIb/include/dji_upgrade.h
+hal_mdk\test_upgrade.o: ..\Module_sample\upgrade\test_upgrade_platform_opt.h
+hal_mdk\test_upgrade.o: ..\Module_sample\upgrade\test_upgrade.h

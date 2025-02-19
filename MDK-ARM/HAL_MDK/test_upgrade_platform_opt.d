@@ -1,0 +1,13 @@
+hal_mdk\test_upgrade_platform_opt.o: ..\Module_sample\upgrade\test_upgrade_platform_opt.c
+hal_mdk\test_upgrade_platform_opt.o: ..\Module_sample\upgrade\test_upgrade_platform_opt.h
+hal_mdk\test_upgrade_platform_opt.o: ../LIb/include/dji_typedef.h
+hal_mdk\test_upgrade_platform_opt.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\test_upgrade_platform_opt.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdbool.h
+hal_mdk\test_upgrade_platform_opt.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\test_upgrade_platform_opt.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\string.h
+hal_mdk\test_upgrade_platform_opt.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\test_upgrade_platform_opt.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdio.h
+hal_mdk\test_upgrade_platform_opt.o: ../LIb/include/dji_error.h
+hal_mdk\test_upgrade_platform_opt.o: ../LIb/include/dji_upgrade.h
+hal_mdk\test_upgrade_platform_opt.o: ../LIb/include/dji_logger.h
+hal_mdk\test_upgrade_platform_opt.o: ../LIb/include/dji_platform.h

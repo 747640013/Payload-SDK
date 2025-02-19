@@ -1,0 +1,17 @@
+hal_mdk\test_waypoint_v3.o: ..\Module_sample\waypoint_v3\test_waypoint_v3.c
+hal_mdk\test_waypoint_v3.o: ../Module_sample/utils/util_file.h
+hal_mdk\test_waypoint_v3.o: ../Module_sample/utils/util_misc.h
+hal_mdk\test_waypoint_v3.o: ../LIb/include/dji_typedef.h
+hal_mdk\test_waypoint_v3.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\test_waypoint_v3.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdbool.h
+hal_mdk\test_waypoint_v3.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\test_waypoint_v3.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\string.h
+hal_mdk\test_waypoint_v3.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\test_waypoint_v3.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdio.h
+hal_mdk\test_waypoint_v3.o: ../LIb/include/dji_error.h
+hal_mdk\test_waypoint_v3.o: ..\Module_sample\waypoint_v3\test_waypoint_v3.h
+hal_mdk\test_waypoint_v3.o: ../LIb/include/dji_logger.h
+hal_mdk\test_waypoint_v3.o: ../LIb/include/dji_platform.h
+hal_mdk\test_waypoint_v3.o: ../LIb/include/dji_waypoint_v3.h
+hal_mdk\test_waypoint_v3.o: ..\Module_sample\waypoint_v3\waypoint_file_c/waypoint_v3_test_file_kmz.h
+hal_mdk\test_waypoint_v3.o: ../LIb/include/dji_fc_subscription.h

@@ -1,0 +1,15 @@
+hal_mdk\timers.o: ..\MIDWARE\FreeRTOS\Source\timers.c
+hal_mdk\timers.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/FreeRTOS.h
+hal_mdk\timers.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\timers.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\timers.o: ../Core/Inc/FreeRTOSConfig.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/projdefs.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/portable.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/deprecated_definitions.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/mpu_wrappers.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/task.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/list.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/queue.h
+hal_mdk\timers.o: ../MIDWARE/FreeRTOS/Source/include/timers.h

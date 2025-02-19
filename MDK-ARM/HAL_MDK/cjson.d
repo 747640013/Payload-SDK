@@ -1,0 +1,10 @@
+hal_mdk\cjson.o: ..\Module_sample\utils\cJSON.c
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\string.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdio.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\math.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\limits.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\ctype.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\cjson.o: ..\Module_sample\utils\cJSON.h
+hal_mdk\cjson.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h

@@ -1,0 +1,16 @@
+hal_mdk\test_time_sync.o: ..\Module_sample\time_sync\test_time_sync.c
+hal_mdk\test_time_sync.o: ../Module_sample/fc_subscription/test_fc_subscription.h
+hal_mdk\test_time_sync.o: ../LIb/include/dji_typedef.h
+hal_mdk\test_time_sync.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdint.h
+hal_mdk\test_time_sync.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdbool.h
+hal_mdk\test_time_sync.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stddef.h
+hal_mdk\test_time_sync.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\string.h
+hal_mdk\test_time_sync.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdlib.h
+hal_mdk\test_time_sync.o: C:\Keil_v54\ARM\ARMCC\Bin\..\include\stdio.h
+hal_mdk\test_time_sync.o: ../LIb/include/dji_error.h
+hal_mdk\test_time_sync.o: ../LIb/include/dji_fc_subscription.h
+hal_mdk\test_time_sync.o: ..\Module_sample\time_sync\test_time_sync.h
+hal_mdk\test_time_sync.o: ../LIb/include/dji_time_sync.h
+hal_mdk\test_time_sync.o: ../LIb/include/dji_logger.h
+hal_mdk\test_time_sync.o: ../LIb/include/dji_platform.h
+hal_mdk\test_time_sync.o: ../Module_sample/utils/util_misc.h

@@ -38,10 +38,10 @@
 //uart uart buffer size define
 #define UART1_READ_BUF_SIZE      64
 #define UART1_WRITE_BUF_SIZE     2048
-#define UART2_READ_BUF_SIZE      64
-#define UART2_WRITE_BUF_SIZE     64
-#define UART3_READ_BUF_SIZE      8192
-#define UART3_WRITE_BUF_SIZE     2048
+#define UART2_READ_BUF_SIZE      8192
+#define UART2_WRITE_BUF_SIZE     2048
+#define UART3_READ_BUF_SIZE      64
+#define UART3_WRITE_BUF_SIZE     64
 
 /* Private macro -------------------------------------------------------------*/
 

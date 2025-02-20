@@ -38,13 +38,13 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-/* 启动任务函数 (测试用)*/
+/* 启动任务函数 (测试FreeRTOS用)*/
 #define START_TASK_PRIORITY 1
 #define START_TASK_STACK_DEPTH 128
 TaskHandle_t start_task_handler;
 void Start_Task(void *pvParameters);
 
-/* Task1 任务 配置 (测试用) */
+/* Task1 任务 配置 (测试FreeRTOS用) */
 #define TASK1_PRIORITY 2
 #define TASK1_STACK_DEPTH 128
 TaskHandle_t task1_handler;

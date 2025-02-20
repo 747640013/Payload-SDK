@@ -54,6 +54,8 @@ extern "C" {
 
 // #define CONFIG_MODULE_SAMPLE_HMS_CUSTOMIZATION_ON
 
+#define CONFIG_MODULE_SAMPLE_FC_SUBSCRIPTION_ON
+
 /*!< Attention: Please uncomment it in gps environment.
 * */
 //#define CONFIG_MODULE_SAMPLE_TIME_SYNC_ON

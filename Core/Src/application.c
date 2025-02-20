@@ -371,7 +371,7 @@ void DjiUser_StartTask(void const *argument) {
   }
 
 out:
-  printf("\r\nout!\r\n");
+  printf("out!\r\n");
   vTaskDelete(xTaskGetCurrentTaskHandle());
 }
 

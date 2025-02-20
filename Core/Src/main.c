@@ -38,13 +38,13 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-/* å¯åŠ¨ä»»åŠ¡å‡½æ•° (æµ‹è¯•ç”¨)*/
+/* Æô¶¯ÈÎÎñº¯Êı (²âÊÔÓÃ)*/
 #define START_TASK_PRIORITY 1
 #define START_TASK_STACK_DEPTH 128
 TaskHandle_t start_task_handler;
 void Start_Task(void *pvParameters);
 
-/* Task1 ä»»åŠ¡ é…ç½® (æµ‹è¯•ç”¨) */
+/* Task1 ÈÎÎñ ÅäÖÃ (²âÊÔÓÃ) */
 #define TASK1_PRIORITY 2
 #define TASK1_STACK_DEPTH 128
 TaskHandle_t task1_handler;
@@ -89,7 +89,7 @@ static void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 
 /**
- * @description: LED0æ¯500msç¿»è½¬ä¸€æ¬¡
+ * @description: LED0Ã¿500ms·­×ªÒ»´Î
  * @param {void *} pvParameters
  * @return {*}
  */
@@ -105,8 +105,8 @@ void Task1(void* pvParameters){
 
 void Start_Task(void *pvParameters){
     
-    taskENTER_CRITICAL();   // è¿›å…¥ä¸´ç•ŒåŒºåŸŸ
-    /*å¯åŠ¨ä»»åŠ¡1*/
+    taskENTER_CRITICAL();   // ½øÈëÁÙ½çÇøÓò
+    /*Æô¶¯ÈÎÎñ1*/
     xTaskCreate(            (TaskFunction_t)Task1,
                             (char *) "task1", /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
                             (configSTACK_DEPTH_TYPE) TASK1_STACK_DEPTH,
@@ -114,7 +114,7 @@ void Start_Task(void *pvParameters){
                             (UBaseType_t)TASK1_PRIORITY,
                             (TaskHandle_t *)&task1_handler);
     vTaskDelete(NULL);
-    taskEXIT_CRITICAL();/*é€€å‡ºä¸´ç•ŒåŒº*/
+    taskEXIT_CRITICAL();/*ÍË³öÁÙ½çÇø*/
 }
 /* USER CODE END 0 */
 

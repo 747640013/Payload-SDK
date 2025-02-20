@@ -40,7 +40,7 @@
 
 /* Exported macros -----------------------------------------------------------*/
 #define DJI_CONSOLE_UART_NUM             UART_NUM_1
-#define DJI_CONSOLE_UART_BAUD            115200
+#define DJI_CONSOLE_UART_BAUD            921600
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {

@@ -33,8 +33,9 @@
 
 /* Exported constants --------------------------------------------------------*/
 #define USING_UART_PORT_1
-#define USING_UART_PORT_2
+//#define USING_UART_PORT_2
 #define USING_UART_PORT_3
+#define USING_UART_PORT_4
 
 #define UART_ERROR      (-1)
 
@@ -47,6 +48,7 @@ typedef enum {
     UART_NUM_1 = 1,
     UART_NUM_2 = 2,
     UART_NUM_3 = 3,
+    UART_NUM_4 = 4,
 } E_UartNum;
 
 typedef struct {

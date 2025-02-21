@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2025 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2025 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
@@ -22,12 +22,14 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include<stdio.h>
-#include"uart.h"
-#include"FreeRTOS.h"
-#include"task.h"
-#include"led.h"
+#include "FreeRTOS.h"
 #include "application.h"
+#include "led.h"
+#include "task.h"
+#include "uart.h"
+#include <stdio.h>
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,10 +52,10 @@ void Start_Task(void *pvParameters);
 TaskHandle_t task1_handler;
 void Task1(void *pvParameters);
 
-#define USER_START_TASK_STACK_SIZE          2048
-#define USER_START_TASK_PRIORITY            0
-#define USER_RUN_INDICATE_TASK_STACK_SIZE   256
-#define USER_RUN_INDICATE_TASK_PRIORITY     0
+#define USER_START_TASK_STACK_SIZE 2048
+#define USER_START_TASK_PRIORITY 0
+#define USER_RUN_INDICATE_TASK_STACK_SIZE 256
+#define USER_RUN_INDICATE_TASK_PRIORITY 0
 
 /* USER CODE END PD */
 
@@ -91,23 +93,23 @@ void Task1(void* pvParameters){
     while(1){
 	    printf("\ttask1...\n");
 			//UART_Write(UART_NUM_1,(uint8_t*)"test\r\n",6);
-      Led_Trigger(LED2);
-      vTaskDelay(500);
-    }
+    Led_Trigger(LED2);
+    vTaskDelay(500);
+  }
 }
 
 
 void Start_Task(void *pvParameters){
-    
+
     taskENTER_CRITICAL();   // 进入临界区域
-    /*启动任务1*/
+  /*启动任务1*/
     xTaskCreate(            (TaskFunction_t)Task1,
                             (char *) "task1", /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
                             (configSTACK_DEPTH_TYPE) TASK1_STACK_DEPTH,
                             (void *) NULL,
                             (UBaseType_t)TASK1_PRIORITY,
                             (TaskHandle_t *)&task1_handler);
-    vTaskDelete(NULL);
+  vTaskDelete(NULL);
     taskEXIT_CRITICAL();/*退出临界区*/
 }
 /* USER CODE END 0 */
@@ -136,27 +138,39 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-	
+
   // Led_Init(LED2);
-	// UART_Init(DJI_CONSOLE_UART_NUM,DJI_CONSOLE_UART_BAUD);
-	
+  // UART_Init(DJI_CONSOLE_UART_NUM,DJI_CONSOLE_UART_BAUD);
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   
 
   /* USER CODE BEGIN 2 */
-   xTaskCreate((TaskFunction_t) DjiUser_StartTask, "start_task", USER_START_TASK_STACK_SIZE,
+   xTaskCreate((TaskFunction_t) DjiUser_StartTask, "start_task",
+   USER_START_TASK_STACK_SIZE,
                 NULL, USER_START_TASK_PRIORITY, (TaskHandle_t *) startTask);
-	 xTaskCreate((TaskFunction_t) DjiUser_MonitorTask, "monitor_task", USER_RUN_INDICATE_TASK_STACK_SIZE,
-                NULL, USER_RUN_INDICATE_TASK_PRIORITY, (TaskHandle_t *) runIndicateTask);						
+   xTaskCreate((TaskFunction_t) DjiUser_MonitorTask, "monitor_task",
+   USER_RUN_INDICATE_TASK_STACK_SIZE,
+                NULL, USER_RUN_INDICATE_TASK_PRIORITY, (TaskHandle_t *)
+                runIndicateTask);
     vTaskStartScheduler();
+
+  // xTaskCreate(
+  //     (TaskFunction_t)Start_Task,
+  //     (char *)"start_task", /*lint !e971 Unqualified char types are allowed for
+  //                              strings and single characters only. */
+  //     (configSTACK_DEPTH_TYPE)START_TASK_STACK_DEPTH, (void *)NULL,
+  //     (UBaseType_t)START_TASK_PRIORITY, (TaskHandle_t *)&start_task_handler);
+  // vTaskStartScheduler();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+
+  while (1) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

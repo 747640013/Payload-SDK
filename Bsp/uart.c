@@ -47,6 +47,10 @@
 #define UART3_READ_BUF_SIZE      64
 #define UART3_WRITE_BUF_SIZE     64
 
+#ifdef USING_UART_PORT_4
+#define UART4_READ_BUF_SIZE      8192
+#define UART4_WRITE_BUF_SIZE     2048
+#endif
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
@@ -531,9 +535,9 @@ int fputc(int ch,FILE *f)
         HAL_UART_Transmit(&s_uart2Handle, (uint8_t *) &ch, 1, 0xFFFF);
     } else if (DJI_CONSOLE_UART_NUM == UART_NUM_3) {
         HAL_UART_Transmit(&s_uart3Handle, (uint8_t *) &ch, 1, 0xFFFF);
-    } else if (DJI_CONSOLE_UART_NUM == UART_NUM_4) {
+    } /*else if (DJI_CONSOLE_UART_NUM == UART_NUM_4) {
             HAL_UART_Transmit(&s_uart4Handle, (uint8_t *) &ch, 1, 0xFFFF);
-    }
+    }*/
 
     return ch;
 }
@@ -552,9 +556,9 @@ PUTCHAR_PROTOTYPE
         HAL_UART_Transmit(&s_uart2Handle, (uint8_t *) &ch, 1, 0xFFFF);
     } else if (DJI_CONSOLE_UART_NUM == UART_NUM_3) {
         HAL_UART_Transmit(&s_uart3Handle, (uint8_t *) &ch, 1, 0xFFFF);
-    } else if (DJI_CONSOLE_UART_NUM == UART_NUM_4) {
+    } /*else if (DJI_CONSOLE_UART_NUM == UART_NUM_4) {
         HAL_UART_Transmit(&s_uart4Handle, (uint8_t *) &ch, 1, 0xFFFF);
-    }
+    }*/
 
     return ch;
 }

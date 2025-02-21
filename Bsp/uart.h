@@ -33,9 +33,9 @@
 
 /* Exported constants --------------------------------------------------------*/
 #define USING_UART_PORT_1
-//#define USING_UART_PORT_2
+#define USING_UART_PORT_2
 #define USING_UART_PORT_3
-#define USING_UART_PORT_4
+//#define USING_UART_PORT_4
 
 #define UART_ERROR      (-1)
 

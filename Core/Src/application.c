@@ -178,13 +178,13 @@ void DjiUser_StartTask(void const *argument) {
     USER_LOG_ERROR("set serial number error");
     goto out;
   }
-  USER_LOG_INFO("test1");
+
   returnCode = DjiCore_Init(&userInfo);
   if (returnCode != DJI_ERROR_SYSTEM_MODULE_CODE_SUCCESS) {
     USER_LOG_ERROR("core init error\n");
     goto out;
   }
-  USER_LOG_INFO("test2");
+  
   returnCode = DjiAircraftInfo_GetBaseInfo(&aircraftInfoBaseInfo);
   if (returnCode != DJI_ERROR_SYSTEM_MODULE_CODE_SUCCESS) {
     USER_LOG_ERROR("get aircraft base info error");

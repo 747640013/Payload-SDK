@@ -183,7 +183,7 @@ T_DjiReturnCode DjiTest_FcSubscriptionRunSample(void)
             USER_LOG_ERROR("get value of topic battery single info index1 error.");
         } else {
             USER_LOG_INFO(
-                "battery single info index1: capacity percent = %ld% voltage = %ldV temperature = %.2f degree.",
+                "battery single info index1: capacity percent = %ld%% voltage = %ldV temperature = %.2f degree.",
                 singleBatteryInfo.batteryCapacityPercent,
                 singleBatteryInfo.currentVoltage / 1000,
                 (dji_f32_t) singleBatteryInfo.batteryTemperature / 10);
@@ -197,7 +197,7 @@ T_DjiReturnCode DjiTest_FcSubscriptionRunSample(void)
             USER_LOG_ERROR("get value of topic battery single info index2 error.");
         } else {
             USER_LOG_INFO(
-                "battery single info index2: capacity percent = %ld% voltage = %ldV temperature = %.2f degree.\r\n",
+                "battery single info index2: capacity percent = %ld%% voltage = %ldV temperature = %.2f degree.\r\n",
                 singleBatteryInfo.batteryCapacityPercent,
                 singleBatteryInfo.currentVoltage / 1000,
                 (dji_f32_t) singleBatteryInfo.batteryTemperature / 10);

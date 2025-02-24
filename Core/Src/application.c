@@ -127,6 +127,7 @@ void DjiUser_StartTask(void const *argument) {
   };
 
   UART_Init(DJI_CONSOLE_UART_NUM, DJI_CONSOLE_UART_BAUD);
+  UART_Init(DJI_TRANSMISSION_UART_NUM, DJI_TRANSMISSION_UART_BAUD);
   Led_Init(LED2);
   Led_Off(LED2);
 
@@ -184,7 +185,7 @@ void DjiUser_StartTask(void const *argument) {
     USER_LOG_ERROR("core init error\n");
     goto out;
   }
-  
+
   returnCode = DjiAircraftInfo_GetBaseInfo(&aircraftInfoBaseInfo);
   if (returnCode != DJI_ERROR_SYSTEM_MODULE_CODE_SUCCESS) {
     USER_LOG_ERROR("get aircraft base info error");

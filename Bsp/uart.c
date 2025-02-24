@@ -40,7 +40,7 @@
 #define UART1_WRITE_BUF_SIZE     2048
 
 #ifdef USING_UART_PORT_2
-#define UART2_READ_BUF_SIZE      8192
+#define UART2_READ_BUF_SIZE      4096
 #define UART2_WRITE_BUF_SIZE     2048
 #endif
 
@@ -48,8 +48,8 @@
 #define UART3_WRITE_BUF_SIZE     64
 
 #ifdef USING_UART_PORT_4
-#define UART4_READ_BUF_SIZE      8192
-#define UART4_WRITE_BUF_SIZE     2048
+#define UART4_READ_BUF_SIZE      64
+#define UART4_WRITE_BUF_SIZE     256
 #endif
 /* Private macro -------------------------------------------------------------*/
 

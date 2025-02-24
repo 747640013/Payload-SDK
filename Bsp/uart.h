@@ -35,25 +35,28 @@
 #define USING_UART_PORT_1
 #define USING_UART_PORT_2
 #define USING_UART_PORT_3
-//#define USING_UART_PORT_4
+#define USING_UART_PORT_4
 
-#define UART_ERROR      (-1)
+#define UART_ERROR (-1)
 
 /* Exported macros -----------------------------------------------------------*/
-#define DJI_CONSOLE_UART_NUM             UART_NUM_1
-#define DJI_CONSOLE_UART_BAUD            921600
+#define DJI_CONSOLE_UART_NUM UART_NUM_1
+#define DJI_CONSOLE_UART_BAUD 921600
+#define DJI_TRANSMISSION_UART_NUM UART_NUM_4
+#define DJI_TRANSMISSION_UART_BAUD 115200
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
-    UART_NUM_1 = 1,
-    UART_NUM_2 = 2,
-    UART_NUM_3 = 3,
-    UART_NUM_4 = 4,
+  UART_NUM_1 = 1,
+  UART_NUM_2 = 2,
+  UART_NUM_3 = 3,
+  UART_NUM_4 = 4,
 } E_UartNum;
 
 typedef struct {
-    uint32_t countOfLostData; /*!< Count of data lost, unit: byte. */
-    uint16_t maxUsedCapacityOfBuffer; /*!< Max capacity of buffer that have been used, unit: byte. */
+  uint32_t countOfLostData;         /*!< Count of data lost, unit: byte. */
+  uint16_t maxUsedCapacityOfBuffer; /*!< Max capacity of buffer that have been
+                                       used, unit: byte. */
 } T_UartBufferState;
 
 /* Exported variables --------------------------------------------------------*/
@@ -61,7 +64,8 @@ typedef struct {
 void UART_Init(E_UartNum uartNum, uint32_t baudRate);
 int UART_Read(E_UartNum uartNum, uint8_t *buf, uint16_t readSize);
 int UART_Write(E_UartNum uartNum, const uint8_t *buf, uint16_t writeSize);
-void UART_GetBufferState(E_UartNum uartNum, T_UartBufferState *readBufferState, T_UartBufferState *writeBufferState);
+void UART_GetBufferState(E_UartNum uartNum, T_UartBufferState *readBufferState,
+                         T_UartBufferState *writeBufferState);
 
 /* Private constants ---------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/

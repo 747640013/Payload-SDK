@@ -340,7 +340,7 @@
               <MiscControls>--diag_suppress=188,177,550,940,66,546 --gnu   -DUSE_USB_HOST_UART=1 --split_sections</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,SYSTEM_ARCH_RTOS=1</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../MiddleWare/FreeRTOS/Source/include;../MiddleWare/FreeRTOS/Source/CMSIS_RTOS;../Middleware/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Bsp;../LIb/include;../Module_Sample;../Common/osal;../Usb_host/App;../Usb_host/Target;../Hal;../STM32_USB_Host_Library/Core/Inc;../STM32_USB_Host_Library/Class/CDC/Inc;..\Module_Sample\fc_data_transmission</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../MiddleWare/FreeRTOS/Source/include;../MiddleWare/FreeRTOS/Source/CMSIS_RTOS;../Middleware/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Bsp;../LIb/include;../Module_Sample;../Common/osal;../Usb_host/App;../Usb_host/Target;../Hal;../STM32_USB_Host_Library/Core/Inc;../STM32_USB_Host_Library/Class/CDC/Inc;..\Module_Sample\fc_data_transmission;..\Module_Sample\utils</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

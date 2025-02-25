@@ -6,8 +6,8 @@
 #include "dji_fc_subscription.h"
 #include "dji_logger.h"
 #include "dji_platform.h"
-#include "util_misc.h"
 #include "uart.h"
+#include "util_misc.h"
 
 LARGE_PACKET_t packet = {FRAME1, FRAME2, MESSAGE_ID, DATA_LENGTH};
 
@@ -36,8 +36,6 @@ static T_DjiReturnCode Dji_CameraManagerGetLidarRangingInfo(
     E_DjiMountPosition position);
 
 static void *UserFcSubscription_Task(void *arg);
-void sum_checksum(LARGE_PACKET_t *packet);
-void xor_checksum(LARGE_PACKET_t *packet);
 
 T_DjiReturnCode Fc_SubscriptionStartService(void) {
   T_DjiReturnCode djiStat;
@@ -200,21 +198,21 @@ static T_DjiReturnCode Dji_FcSubscriptionReceiveQuaternionCallback(
   USER_UTIL_UNUSED(dataSize);
 
   packet.Senses_Data_t.pitch =
-      (dji_f64_t)asinf(-2 * quaternion->q1 * quaternion->q3 +
+      (dji_f32_t)asinf(-2 * quaternion->q1 * quaternion->q3 +
                        2 * quaternion->q0 * quaternion->q2) *
-      57.3;
+      57.3f;
   packet.Senses_Data_t.roll =
-      (dji_f64_t)atan2f(2 * quaternion->q2 * quaternion->q3 +
+      (dji_f32_t)atan2f(2 * quaternion->q2 * quaternion->q3 +
                             2 * quaternion->q0 * quaternion->q1,
                         -2 * quaternion->q1 * quaternion->q1 -
                             2 * quaternion->q2 * quaternion->q2 + 1) *
-      57.3;
+      57.3f;
   packet.Senses_Data_t.yaw =
-      (dji_f64_t)atan2f(2 * quaternion->q1 * quaternion->q2 +
+      (dji_f32_t)atan2f(2 * quaternion->q1 * quaternion->q2 +
                             2 * quaternion->q0 * quaternion->q3,
                         -2 * quaternion->q2 * quaternion->q2 -
                             2 * quaternion->q3 * quaternion->q3 + 1) *
-      57.3;
+      57.3f;
 
   return DJI_ERROR_SYSTEM_MODULE_CODE_SUCCESS;
 }
@@ -233,7 +231,7 @@ static void *UserFcSubscription_Task(void *arg) {
   T_DjiFcSubscriptionRtkVelocity rtkVelocity = {0};
   T_DjiOsalHandler *osalHandler = NULL;
 
-  packet.Senses_Data_t.reserved1 = 0;
+  memset(packet.Senses_Data_t.reserved, 0, LEN);
 
   USER_UTIL_UNUSED(arg);
   osalHandler = DjiPlatform_GetOsalHandler();
@@ -251,7 +249,11 @@ static void *UserFcSubscription_Task(void *arg) {
     packet.Senses_Data_t.timestamp_ms = timestamp.microsecond;
     packet.Senses_Data_t.total_satellite_number_used =
         gpsDetails.totalSatelliteNumberUsed;
-
+    packet.Senses_Data_t.hdop = gpsDetails.hdop;
+    packet.Senses_Data_t.pdop = gpsDetails.pdop;
+    packet.Senses_Data_t.vacc = gpsDetails.vacc;
+    packet.Senses_Data_t.hacc = gpsDetails.hacc;
+    packet.Senses_Data_t.sacc = gpsDetails.sacc;
     /*主动获取rtk定位状态信息*/
     djiStat = DjiFcSubscription_GetLatestValueOfTopic(
         DJI_FC_SUBSCRIPTION_TOPIC_RTK_POSITION_INFO,
@@ -331,7 +333,7 @@ static void *UserFcSubscription_Task(void *arg) {
 
     sum_checksum(&packet);
     xor_checksum(&packet);
-    
+
     // 串口发送数据
     UART_Write(DJI_TRANSMISSION_UART_NUM, (uint8_t *)&packet, Packet_Length);
   }
@@ -340,8 +342,7 @@ static void *UserFcSubscription_Task(void *arg) {
 // 和校验（Sum Checksum）计算函数
 void sum_checksum(LARGE_PACKET_t *packet) {
   uint8_t sum = 0;
-  // 累加从数据起始到校验位前的数据（即从 payload len 到 xor_check
-  // 前的所有字段）
+  // 累加从载荷长度位到和校验位前的数据
   for (int i = CHECK_START; i < CHECK_LENGTH;
        i++) {  // CHECK_START = 3, CHECK_LENGTH = 103
     sum += packet->raw_large[i];
@@ -352,8 +353,8 @@ void sum_checksum(LARGE_PACKET_t *packet) {
 // 异或校验（XOR Checksum）计算函数
 void xor_checksum(LARGE_PACKET_t *packet) {
   uint8_t xor_result = 0;
-  // 从数据起始到校验位前的数据（即从 payload len 到 sum_check 前的所有字段）
-  for (int i = CHECK_START; i < CHECK_LENGTH; i++) {
+  // 从载荷长度位到异或校验位前的数据
+  for (int i = CHECK_START; i <= CHECK_LENGTH; i++) {
     xor_result ^= packet->raw_large[i];
   }
   packet->Senses_Data_t.xor_check = xor_result;

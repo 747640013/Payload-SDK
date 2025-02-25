@@ -22,13 +22,14 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
+
 #include "FreeRTOS.h"
 #include "application.h"
+#include "fc_data_transmission.h"
 #include "led.h"
 #include "task.h"
 #include "uart.h"
-#include <stdio.h>
-
 
 /* USER CODE END Includes */
 
@@ -76,58 +77,54 @@ static TaskHandle_t runIndicateTask;
 
 /* Private function prototypes -----------------------------------------------*/
 
-
 /* USER CODE BEGIN PFP */
 static void SystemClock_Config(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+LARGE_PACKET_t packet_test = {FRAME1, FRAME2, MESSAGE_ID, DATA_LENGTH};
 /**
  * @description: LED0每500ms翻转一次
  * @param {void *} pvParameters
  * @return {*}
  */
-void Task1(void* pvParameters){
-    while(1){
-	    printf("\ttask1...\n");
-			//UART_Write(UART_NUM_1,(uint8_t*)"test\r\n",6);
+void Task1(void *pvParameters) {
+  while (1) {
+    // printf("\ttask1...\n");
+    UART_Write(DJI_TRANSMISSION_UART_NUM, (uint8_t *)&packet_test,
+               Packet_Length);
     Led_Trigger(LED2);
     vTaskDelay(500);
   }
 }
 
-
-void Start_Task(void *pvParameters){
-
-    taskENTER_CRITICAL();   // 进入临界区域
-  /*启动任务1*/
-    xTaskCreate(            (TaskFunction_t)Task1,
-                            (char *) "task1", /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
-                            (configSTACK_DEPTH_TYPE) TASK1_STACK_DEPTH,
-                            (void *) NULL,
-                            (UBaseType_t)TASK1_PRIORITY,
-                            (TaskHandle_t *)&task1_handler);
+void Start_Task(void *pvParameters) {
+  taskENTER_CRITICAL();  // 进入临界区域
+                         /*启动任务1*/
+  xTaskCreate((TaskFunction_t)Task1,
+              (char *)"task1", /*lint !e971 Unqualified char types are allowed
+                                  for strings and single characters only. */
+              (configSTACK_DEPTH_TYPE)TASK1_STACK_DEPTH, (void *)NULL,
+              (UBaseType_t)TASK1_PRIORITY, (TaskHandle_t *)&task1_handler);
   vTaskDelete(NULL);
-    taskEXIT_CRITICAL();/*退出临界区*/
+  taskEXIT_CRITICAL(); /*退出临界区*/
 }
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
-
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void) {
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick.
+   */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -139,31 +136,57 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
-  // Led_Init(LED2);
-  // UART_Init(DJI_CONSOLE_UART_NUM,DJI_CONSOLE_UART_BAUD);
-
+  Led_Init(LED2);
+  UART_Init(DJI_CONSOLE_UART_NUM, DJI_CONSOLE_UART_BAUD);
+  UART_Init(DJI_TRANSMISSION_UART_NUM, DJI_TRANSMISSION_UART_BAUD);
+  printf("Packet_len=%d\n", sizeof(packet_test));
+  packet_test.Senses_Data_t.timestamp_ymd = 20250205;
+  packet_test.Senses_Data_t.timestamp_hms = 210000;
+  packet_test.Senses_Data_t.timestamp_ms = 1;
+  packet_test.Senses_Data_t.latitude = 2.0;
+  packet_test.Senses_Data_t.longitude = 3.0;
+  packet_test.Senses_Data_t.altitude = 4.0;
+  packet_test.Senses_Data_t.velocity_north = 5.0;
+  packet_test.Senses_Data_t.velocity_east = 6.0;
+  packet_test.Senses_Data_t.velocity_up = 7.0;
+  packet_test.Senses_Data_t.pitch = 8.0;
+  packet_test.Senses_Data_t.roll = 9.0;
+  packet_test.Senses_Data_t.yaw = 10.0;
+  packet_test.Senses_Data_t.hdop = 11.0;
+  packet_test.Senses_Data_t.pdop = 12.0;
+  packet_test.Senses_Data_t.vacc = 13.0;
+  packet_test.Senses_Data_t.hacc = 14.0;
+  packet_test.Senses_Data_t.sacc = 15.0;
+  packet_test.Senses_Data_t.total_satellite_number_used = 16;
+  packet_test.Senses_Data_t.fixed_status = 17;
+  memset(packet_test.Senses_Data_t.reserved, 0, LEN);
+  packet_test.Senses_Data_t.laser_distance = 18.0;
+  packet_test.Senses_Data_t.tgt_longitude = 19.0;
+  packet_test.Senses_Data_t.tgt_latitude = 20.0;
+  packet_test.Senses_Data_t.tgt_altitude = 21.0;
+  sum_checksum(&packet_test);
+  xor_checksum(&packet_test);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  
 
   /* USER CODE BEGIN 2 */
-   xTaskCreate((TaskFunction_t) DjiUser_StartTask, "start_task",
-   USER_START_TASK_STACK_SIZE,
-                NULL, USER_START_TASK_PRIORITY, (TaskHandle_t *) startTask);
-   xTaskCreate((TaskFunction_t) DjiUser_MonitorTask, "monitor_task",
-   USER_RUN_INDICATE_TASK_STACK_SIZE,
-                NULL, USER_RUN_INDICATE_TASK_PRIORITY, (TaskHandle_t *)
-                runIndicateTask);
-    vTaskStartScheduler();
+  //  xTaskCreate((TaskFunction_t) DjiUser_StartTask, "start_task",
+  //  USER_START_TASK_STACK_SIZE,
+  //               NULL, USER_START_TASK_PRIORITY, (TaskHandle_t *) startTask);
+  //  xTaskCreate((TaskFunction_t) DjiUser_MonitorTask, "monitor_task",
+  //  USER_RUN_INDICATE_TASK_STACK_SIZE,
+  //               NULL, USER_RUN_INDICATE_TASK_PRIORITY, (TaskHandle_t *)
+  //               runIndicateTask);
+  //   vTaskStartScheduler();
 
-  // xTaskCreate(
-  //     (TaskFunction_t)Start_Task,
-  //     (char *)"start_task", /*lint !e971 Unqualified char types are allowed for
-  //                              strings and single characters only. */
-  //     (configSTACK_DEPTH_TYPE)START_TASK_STACK_DEPTH, (void *)NULL,
-  //     (UBaseType_t)START_TASK_PRIORITY, (TaskHandle_t *)&start_task_handler);
-  // vTaskStartScheduler();
+  xTaskCreate(
+      (TaskFunction_t)Start_Task,
+      (char *)"start_task", /*lint !e971 Unqualified char types are allowed for
+                               strings and single characters only. */
+      (configSTACK_DEPTH_TYPE)START_TASK_STACK_DEPTH, (void *)NULL,
+      (UBaseType_t)START_TASK_PRIORITY, (TaskHandle_t *)&start_task_handler);
+  vTaskStartScheduler();
 
   /* USER CODE END 2 */
 
@@ -179,22 +202,21 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-static void SystemClock_Config(void)
-{
+ * @brief System Clock Configuration
+ * @retval None
+ */
+static void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-  */
+   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -203,42 +225,37 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK |
+                                RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-  {
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK) {
     Error_Handler();
   }
 }
-
-
 
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
 
 /**
-  * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM1 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  htim : TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
+ * @brief  Period elapsed callback in non blocking mode
+ * @note   This function is called  when TIM1 interrupt took place, inside
+ * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ * a global variable "uwTick" used as application time base.
+ * @param  htim : TIM handle
+ * @retval None
+ */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
@@ -251,32 +268,30 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void)
-{
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
+void Error_Handler(void) {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
-  while (1)
-  {
+  while (1) {
   }
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t *file, uint32_t line)
-{
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
+void assert_failed(uint8_t *file, uint32_t line) {
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
+  /* User can add his own implementation to report the file name and line
+     number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }

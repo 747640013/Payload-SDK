@@ -11,7 +11,7 @@
 #define DATA_LENGTH 0x68 // 载荷长度104
 #define CHECK_START 3
 #define CHECK_LENGTH 108
-#define LEN 2  // 保留字段长度
+#define LEN 4  // 保留字段长度
 
 
 #ifdef __cplusplus
@@ -56,12 +56,12 @@ typedef union {
     uint8_t fixed_status;
 
     /* 测距相关信息 24字节*/
-    int32_t laser_distance;
+    uint16_t laser_distance;
     dji_f64_t tgt_longitude;
     dji_f64_t tgt_latitude;
     int32_t tgt_altitude;
     
-    /* 保留字段 2字节*/
+    /* 保留字段 4字节*/
     uint8_t reserved[LEN];
 
     uint8_t sum_check;

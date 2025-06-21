@@ -1,8 +1,8 @@
 # 新文档
 
 正点原子STM32F407VGT6最小系统板  
-调试串口：usart1 引脚：PA9(Tx) PA10(Rx) 波特率：921600  
-大疆设备通信串口：usart2 引脚：PA2(Tx) PA3(Rx) 
+调试串口：usart1 引脚：PA9(Tx)  PA10(Rx) 波特率：921600  
+大疆设备通信串口：usart2 引脚：PA2(Tx) PA3(Rx)  
 授权信息文件路径：Core/Inc/dji_sdk_app_info.h
 # 原文档
 

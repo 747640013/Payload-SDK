@@ -100,8 +100,8 @@ void Task1(void *pvParameters) {
 }
 
 void Start_Task(void *pvParameters) {
-  taskENTER_CRITICAL();  // 进入临界区域
-                         /*启动任务1*/
+  taskENTER_CRITICAL(); // 进入临界区域
+                        /*启动任务1*/
   xTaskCreate((TaskFunction_t)Task1,
               (char *)"task1", /*lint !e971 Unqualified char types are allowed
                                   for strings and single characters only. */
@@ -136,57 +136,57 @@ int main(void) {
 
   /* USER CODE BEGIN SysInit */
 
-  Led_Init(LED2);
-  UART_Init(DJI_CONSOLE_UART_NUM, DJI_CONSOLE_UART_BAUD);
-  UART_Init(DJI_TRANSMISSION_UART_NUM, DJI_TRANSMISSION_UART_BAUD);
-  printf("Packet_len=%d\n", sizeof(packet_test));
-  packet_test.Senses_Data_t.timestamp_ymd = 20250205;
-  packet_test.Senses_Data_t.timestamp_hms = 210000;
-  packet_test.Senses_Data_t.timestamp_ms = 1;
-  packet_test.Senses_Data_t.latitude = 2.0;
-  packet_test.Senses_Data_t.longitude = 3.0;
-  packet_test.Senses_Data_t.altitude = 4.0;
-  packet_test.Senses_Data_t.velocity_north = 5.0;
-  packet_test.Senses_Data_t.velocity_east = 6.0;
-  packet_test.Senses_Data_t.velocity_up = 7.0;
-  packet_test.Senses_Data_t.pitch = 8.0;
-  packet_test.Senses_Data_t.roll = 9.0;
-  packet_test.Senses_Data_t.yaw = 10.0;
-  packet_test.Senses_Data_t.hdop = 11.0;
-  packet_test.Senses_Data_t.pdop = 12.0;
-  packet_test.Senses_Data_t.vacc = 13.0;
-  packet_test.Senses_Data_t.hacc = 14.0;
-  packet_test.Senses_Data_t.sacc = 15.0;
-  packet_test.Senses_Data_t.total_satellite_number_used = 16;
-  packet_test.Senses_Data_t.fixed_status = 17;
-  memset(packet_test.Senses_Data_t.reserved, 0, LEN);
-  packet_test.Senses_Data_t.laser_distance = 18.0;
-  packet_test.Senses_Data_t.tgt_longitude = 19.0;
-  packet_test.Senses_Data_t.tgt_latitude = 20.0;
-  packet_test.Senses_Data_t.tgt_altitude = 21.0;
-  sum_checksum(&packet_test);
-  xor_checksum(&packet_test);
+  // Led_Init(LED2);
+  // UART_Init(DJI_CONSOLE_UART_NUM, DJI_CONSOLE_UART_BAUD);
+  // UART_Init(DJI_TRANSMISSION_UART_NUM, DJI_TRANSMISSION_UART_BAUD);
+  // printf("Packet_len=%d\n", sizeof(packet_test));
+  // packet_test.Senses_Data_t.timestamp_ymd = 20250205;
+  // packet_test.Senses_Data_t.timestamp_hms = 210000;
+  // packet_test.Senses_Data_t.timestamp_ms = 1;
+  // packet_test.Senses_Data_t.latitude = 2.0;
+  // packet_test.Senses_Data_t.longitude = 3.0;
+  // packet_test.Senses_Data_t.altitude = 4.0;
+  // packet_test.Senses_Data_t.velocity_north = 5.0;
+  // packet_test.Senses_Data_t.velocity_east = 6.0;
+  // packet_test.Senses_Data_t.velocity_up = 7.0;
+  // packet_test.Senses_Data_t.pitch = 8.0;
+  // packet_test.Senses_Data_t.roll = 9.0;
+  // packet_test.Senses_Data_t.yaw = 10.0;
+  // packet_test.Senses_Data_t.hdop = 11.0;
+  // packet_test.Senses_Data_t.pdop = 12.0;
+  // packet_test.Senses_Data_t.vacc = 13.0;
+  // packet_test.Senses_Data_t.hacc = 14.0;
+  // packet_test.Senses_Data_t.sacc = 15.0;
+  // packet_test.Senses_Data_t.total_satellite_number_used = 16;
+  // packet_test.Senses_Data_t.fixed_status = 17;
+  // memset(packet_test.Senses_Data_t.reserved, 0, LEN);
+  // packet_test.Senses_Data_t.laser_distance = 18.0;
+  // packet_test.Senses_Data_t.tgt_longitude = 19.0;
+  // packet_test.Senses_Data_t.tgt_latitude = 20.0;
+  // packet_test.Senses_Data_t.tgt_altitude = 21.0;
+  // sum_checksum(&packet_test);
+  // xor_checksum(&packet_test);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
 
   /* USER CODE BEGIN 2 */
-  //  xTaskCreate((TaskFunction_t) DjiUser_StartTask, "start_task",
-  //  USER_START_TASK_STACK_SIZE,
-  //               NULL, USER_START_TASK_PRIORITY, (TaskHandle_t *) startTask);
-  //  xTaskCreate((TaskFunction_t) DjiUser_MonitorTask, "monitor_task",
-  //  USER_RUN_INDICATE_TASK_STACK_SIZE,
-  //               NULL, USER_RUN_INDICATE_TASK_PRIORITY, (TaskHandle_t *)
-  //               runIndicateTask);
-  //   vTaskStartScheduler();
-
-  xTaskCreate(
-      (TaskFunction_t)Start_Task,
-      (char *)"start_task", /*lint !e971 Unqualified char types are allowed for
-                               strings and single characters only. */
-      (configSTACK_DEPTH_TYPE)START_TASK_STACK_DEPTH, (void *)NULL,
-      (UBaseType_t)START_TASK_PRIORITY, (TaskHandle_t *)&start_task_handler);
+  xTaskCreate((TaskFunction_t)DjiUser_StartTask, "start_task",
+              USER_START_TASK_STACK_SIZE, NULL, USER_START_TASK_PRIORITY,
+              (TaskHandle_t *)startTask);
+  xTaskCreate((TaskFunction_t)DjiUser_MonitorTask, "monitor_task",
+              USER_RUN_INDICATE_TASK_STACK_SIZE, NULL,
+              USER_RUN_INDICATE_TASK_PRIORITY, (TaskHandle_t *)runIndicateTask);
   vTaskStartScheduler();
+
+  // xTaskCreate(
+  //     (TaskFunction_t)Start_Task,
+  //     (char *)"start_task", /*lint !e971 Unqualified char types are allowed
+  //     for
+  //                              strings and single characters only. */
+  //     (configSTACK_DEPTH_TYPE)START_TASK_STACK_DEPTH, (void *)NULL,
+  //     (UBaseType_t)START_TASK_PRIORITY, (TaskHandle_t *)&start_task_handler);
+  // vTaskStartScheduler();
 
   /* USER CODE END 2 */
 

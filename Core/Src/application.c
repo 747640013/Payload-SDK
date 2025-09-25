@@ -237,7 +237,7 @@ void DjiUser_StartTask(void const *argument) {
 #endif
 
 #ifdef CONFIG_MODULE_SAMPLE_FC_SUBSCRIPTION_ON
-  returnCode = DjiTest_FcSubscriptionStartService();
+  returnCode = Fc_SubscriptionStartService();
   if (returnCode != DJI_ERROR_SYSTEM_MODULE_CODE_SUCCESS) {
     USER_LOG_ERROR("data subscription sample init error\n");
   }
